@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="		
+		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+	<!-- 该 BeanPostProcessor 将自动对标注@Autowired 的 Bean 进行注入 -->
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+	
+	<import resource="*applicationContext.xml"/>
+		
+
+	
+
+	<!-- ******************************** -->	
+	<!-- ********此间配置如非必要请勿修改******** -->
+	<!-- ********omen 2014-12-25 ******** -->
+	<!-- ******************************** -->
+	
+ 	<!--  server handler start -->
+	<bean id="httpServerHandler" class="com.omen.netty.server.http.handler.HttpServerHandler" scope="prototype"/>
+	<!--  server handler end -->
+	
+	<!-- 配置过滤器及server handler -->
+ 	<bean id="httpServerInitializer" class="com.omen.netty.server.http.initializer.HttpServerInitializer" scope="prototype" depends-on="httpServerHandler">
+		<property name="customPipelineMap" ref="customPipelineMap"/>
+	</bean>  
+ 	<!-- 创建channel -->
+ 	<bean id="serverChannelFactory" class="com.omen.netty.server.factory.ServerChannelFactory"  depends-on="httpServerHandler"/>
+	<!-- server -->	
+	<bean id="basicServer" class="com.omen.netty.server.BasicServer" depends-on="serverChannelFactory" />
+	
+	<!-- ******************************** -->	
+	<!-- ********此间配置如非必要请勿修改******** -->
+	<!-- ********omen 2014-12-25 ******** -->
+	<!-- ******************************** -->
+
+</beans>

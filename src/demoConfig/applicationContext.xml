@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="		
+		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+	<import resource="service-beans.xml"/>
+
+	<!--  business pipeline bean define by users start-->
+	<!--  就当是过滤器、拦截器吧!-->
+	<bean id="customRequestEncoder" class="com.omen.netty.http.handler.demoCustomPipeline.CustomRequestEncoder" scope="prototype"/>
+	<!--  business pipeline bean define by users end-->
+	
+	
+	<!-- custom pipeline map start-->
+	<bean id="customPipelineMap" class="java.util.LinkedHashMap" scope="prototype">
+  		<constructor-arg>
+   			<map>
+    			<entry key="customPipeline1" value-ref="customRequestEncoder" />
+    			<entry key="customPipeline2" value-ref="customRequestEncoder" />
+   			<!-- 
+   			 -->
+   			</map>
+  		</constructor-arg>
+ 	</bean>
+	
+	<!-- custom pipeline map end-->
+	
+
+<bean id="systemInfo" class="com.omen.netty.server.sysPojo.SystemInfo" >
+ 		<!--通讯协议目前支持HTTP,HTTPS,TCP,CUSTOM-->
+		<constructor-arg index="0" value="http"/> 
+		<!--端口-->
+		<constructor-arg index="1" type="Integer">           
+			<value>8000</value>       
+		</constructor-arg> 
+		<!-- 通讯类型 0=NIO 1=OIO-->
+		<constructor-arg index="2" type="Integer">           
+			<value>0</value>       
+		</constructor-arg> 
+	</bean>  
+	
+<!-- 	<bean id="systemInfo" class="com.omen.netty.server.sysPojo.SystemInfo" >
+		通讯协议目前支持HTTP,HTTPS,TCP,CUSTOM
+		<constructor-arg index="0" value="http"/> 
+		端口
+		<constructor-arg index="1" type="Integer">           
+			<value>8000</value>       
+		</constructor-arg> 
+		通讯类型 0=NIO 1=OIO
+		<constructor-arg index="2" type="Integer">           
+			<value>0</value>       
+		</constructor-arg> 
+		是否开启SSL 
+	 	<constructor-arg index="3" type="Boolean">           
+			<value>false</value>       
+		</constructor-arg> 
+	 	jks路径
+	 	<constructor-arg index="4" value="jksPath"/>  
+	 	jks密码
+	 	<constructor-arg index="5" value="jksPwd"/>  
+	
+	<bean id="systemInfo" class="com.omen.netty.server.sysPojo.SystemInfo" >
+		通讯协议目前支持HTTP,HTTPS,TCP,CUSTOM
+		<constructor-arg index="0" value="http"/> 
+		端口
+		<constructor-arg index="1" type="Integer">           
+			<value>8000</value>       
+		</constructor-arg> 
+		通讯类型 0=NIO 1=OIO
+		<constructor-arg index="2" type="Integer">           
+			<value>0</value>       
+		</constructor-arg> 
+		是否开启SSL 
+	 	<constructor-arg index="3" type="Boolean">           
+			<value>false</value>       
+		</constructor-arg> 
+	 	jks路径
+	 	<constructor-arg index="5" value="jksPath"/>  
+	 	jks密码
+	 	<constructor-arg index="5" value="jksPwd"/>  
+	 	用于分配处理业务线程的线程组个数 bossGroupSize
+	 	<constructor-arg index="6" value="15"/>  
+	 	业务处理线程大小 workerGroupSize
+	 	<constructor-arg index="7" value="10"/> 
+	</bean>  -->
+ 
+ 
+ 
+</beans>

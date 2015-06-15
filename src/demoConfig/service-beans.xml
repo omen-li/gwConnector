@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation="		
+		http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+
+	<bean id="demoChatHandler" class="com.omen.demo.handler.demoImpl.DemoChatHandler" />
+
+ 	<bean id="serverService" class="com.omen.demo.ChatService"
+		scope="prototype">
+				<property name="handlers">
+			<map>
+			<!-- demo -->
+				<entry key="Demo">
+					<ref bean="demoChatHandler" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+		
+	
+	
+</beans>
