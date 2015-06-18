@@ -16,7 +16,8 @@ if(!window.WebSocket){
 
 
 if(window.WebSocket){
-	socket = new WebSocket("ws://localhost:8000");
+	// socket = new WebSocket("ws://localhost:8000");
+	socket = new WebSocket("ws://114.215.195.44:8001");
 	socket.onmessage = function(event){
 		var ta = document.getElementById('responseText');
 		ta.value="";

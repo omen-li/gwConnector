@@ -84,5 +84,6 @@
 	<classpathentry kind="lib" path="lib/xstream-1.4.1.jar"/>
 	<classpathentry kind="lib" path="lib/zkclient-0.1.jar"/>
 	<classpathentry kind="lib" path="lib/zookeeper-3.3.3.jar"/>
+	<classpathentry kind="lib" path="lib/omen.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
